@@ -1,0 +1,66 @@
+package bt1a;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Order {
+    private int orderID;
+    private LocalDate orderDate;
+    private List<OrderDetail> lineItems;
+
+    public Order(int orderID, LocalDate orderDate) {
+        this.orderID = orderID;
+        this.orderDate = orderDate;
+        this.lineItems = new ArrayList<>();
+    }
+
+    public void addLineItem(Product product, int quantity) {
+        if (lineItems.size() < 20) {
+            lineItems.add(new OrderDetail(product, quantity));
+        } else {
+            System.out.println("The maximum number of line items has been reached.");
+        }
+    }
+
+    public double calcTotalPrice() {
+        double totalPrice = 0.0;
+        for (OrderDetail orderDetail : lineItems) {
+            totalPrice += orderDetail.getQuantity() * orderDetail.getProduct().getPrice();
+        }
+        return totalPrice;
+    }
+
+    public double calcTotalCharge() {
+        double totalCharge = calcTotalPrice();
+        return totalCharge;
+    }
+
+    public List<OrderDetail> getLineItems() {
+        return lineItems;
+    }
+
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Order ID: ").append(orderID).append("\n");
+        stringBuilder.append("Order Date: ").append(orderDate).append("\n");
+        stringBuilder.append("Line Items:\n");
+        for (OrderDetail orderDetail : lineItems) {
+            stringBuilder.append(orderDetail).append("\n");
+        }
+        return stringBuilder.toString();
+    }
+}
