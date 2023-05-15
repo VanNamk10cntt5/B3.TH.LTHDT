@@ -1,0 +1,105 @@
+package bt2a;
+
+import java.util.Date;
+
+abstract class Goods {
+    private String maHang;
+    private String tenHang;
+    private int soLuongTon;
+    private double donGia;
+
+    public Goods(String maHang, String tenHang, int soLuongTon, double donGia) {
+        this.maHang = maHang;
+        this.tenHang = tenHang;
+        this.soLuongTon = soLuongTon;
+        this.donGia = donGia;
+    }
+
+    public abstract double tinhVAT();
+
+    public abstract double tinhTienBanBuon();
+
+    public String getMaHang() {
+        return maHang;
+    }
+
+    public String getTenHang() {
+        return tenHang;
+    }
+
+    public int getSoLuongTon() {
+        return soLuongTon;
+    }
+
+    public double getDonGia() {
+        return donGia;
+    }
+}
+
+class Food extends Goods {
+    private Date ngaySanXuat;
+    private Date ngayHetHan;
+    private String nhaCungCap;
+
+    public Food(String maHang, String tenHang, int soLuongTon, double donGia, Date ngaySanXuat, Date ngayHetHan, String nhaCungCap) {
+        super(maHang, tenHang, soLuongTon, donGia);
+        this.ngaySanXuat = ngaySanXuat;
+        this.ngayHetHan = ngayHetHan;
+        this.nhaCungCap = nhaCungCap;
+    }
+
+    @Override
+    public double tinhVAT() {
+        return getDonGia() * 0.05; // VAT of food is 5%
+    }
+
+    @Override
+    public double tinhTienBanBuon() {
+        return getDonGia() * getSoLuongTon(); // Wholesale price calculation
+    }
+}
+
+class Appliance extends Goods {
+    private int thoiGianBaoHanh;
+    private double congSuat;
+
+    public Appliance(String maHang, String tenHang, int soLuongTon, double donGia, int thoiGianBaoHanh, double congSuat) {
+        super(maHang, tenHang, soLuongTon, donGia);
+        this.thoiGianBaoHanh = thoiGianBaoHanh;
+        this.congSuat = congSuat;
+    }
+
+    @Override
+    public double tinhVAT() {
+        return getDonGia() * 0.1; // VAT of appliances is 10%
+    }
+
+    @Override
+    public double tinhTienBanBuon() {
+        return getDonGia() * getSoLuongTon(); // Wholesale price calculation
+    }
+}
+
+class Ceramic extends Goods {
+    private String nhaSanXuat;
+    private Date ngayNhapKho;
+
+    public Ceramic(String maHang, String tenHang, int soLuongTon, double donGia, String nhaSanXuat, Date ngayNhapKho) {
+        super(maHang, tenHang, soLuongTon, donGia);
+        this.nhaSanXuat = nhaSanXuat;
+        this.ngayNhapKho = ngayNhapKho;
+    }
+
+	@Override
+	public double tinhVAT() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double tinhTienBanBuon() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}
+
