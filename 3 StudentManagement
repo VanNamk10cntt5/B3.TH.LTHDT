@@ -1,0 +1,80 @@
+package bt3;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+class StudentManagement {
+    private List<Student> studentList;
+
+    public StudentManagement() {
+        studentList = new ArrayList<>();
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void addStudent(Student student) {
+        // Kiểm tra xem sinh viên có trùng mã không
+        for (Student s : studentList) {
+            if (s.getMaSV().equals(student.getMaSV())) {
+                System.out.println("Mã sinh viên đã tồn tại. Không thể thêm sinh viên.");
+                return;
+            }
+        }
+
+        studentList.add(student);
+        System.out.println("Thêm sinh viên thành công.");
+    }
+
+    public void removeStudent(String maSV) {
+        for (int i = 0; i < studentList.size(); i++) {
+            if (studentList.get(i).getMaSV().equals(maSV)) {
+                studentList.remove(i);
+                System.out.println("Xóa sinh viên thành công.");
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy sinh viên có mã " + maSV);
+    }
+
+    public void updateStudent(Student student) {
+        for (int i = 0; i < studentList.size(); i++) {
+            if (studentList.get(i).getMaSV().equals(student.getMaSV())) {
+                studentList.set(i, student);
+                System.out.println("Cập nhật thông tin sinh viên thành công.");
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy sinh viên có mã " + student.getMaSV());
+    }
+
+    public Student findStudentByMaSV(String maSV) {
+        for (Student student : studentList) {
+            if (student.getMaSV().equals(maSV)) {
+                return student;
+            }
+        }
+        return null; // Trả về null nếu không tìm thấy sinh viên
+    }
+
+    public List<Student> findStudentByHoTen(String hoTen) {
+        List<Student> result = new ArrayList<>();
+        for (Student student : studentList) {
+            if (student.getHoTen().equals(hoTen)) {
+                result.add(student);
+            }
+        }
+        return result;
+    }
+
+    public void sortStudentList() {
+        Collections.sort(studentList, new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                return s1.getMaSV().compareTo(s2.getMaSV());
+            }
+        });
+    }
+}
