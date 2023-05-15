@@ -1,0 +1,31 @@
+package bt3;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+public class Main {
+	
+	
+	    public static void main(String[] args) {
+	        StudentManagement management = new StudentManagement();
+
+	        // Thêm sinh viên
+	        management.addStudent(new Student("SV001", "Nguyen Van A", 1998));
+	        management.addStudent(new Student("SV002", "Tran Thi B", 1999));
+	        management.addStudent(new Student("SV003", "Pham Van C", 2000));
+	        management.addStudent(new Student("SV004", "Le Thi D", 1997));
+	        management.addStudent(new Student("SV005", "Hoang Van E", 1996));
+
+	        // In ra bảng danh sách sinh viên
+	        System.out.println("Danh sách sinh viên:");
+	        System.out.println("+------+----------------+----------+");
+	        System.out.println("| MãSV |     Họ tên     | Năm sinh |");
+	        System.out.println("+------+----------------+----------+");
+	        List<Student> studentList = management.getStudentList();
+	        for (Student student : studentList) {
+	            System.out.printf("| %-4s | %-14s | %-8d |\n", student.getMaSV(), student.getHoTen(), student.getNamSinh());
+	        }
+	        System.out.println("+------+----------------+----------+");
+	    }
+	}
