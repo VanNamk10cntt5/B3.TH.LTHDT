@@ -1,0 +1,40 @@
+package bt1a;
+
+import java.time.LocalDate;
+
+public class Main {
+    public static void main(String[] args) {
+        // Tạo các sản phẩm
+        Product product1 = new Product("sp1", "Nước tương", 8000);
+        new Product("sp2", "Gạo", 10000);
+        Product product3 = new Product("sp3", "Đường", 10000);
+        Product product4 = new Product("sp4", "Muối", 18000);
+
+        // Tạo hóa đơn
+        Order order = new Order(1, LocalDate.of(2023, 05, 15));
+
+        // Thêm các mặt hàng vào hóa đơn
+        order.addLineItem(product4, 1);
+        order.addLineItem(product1, 2);
+        order.addLineItem(product3, 4);
+
+        // In thông tin hóa đơn
+        System.out.println("Mã HD: " + order.getOrderID());
+        System.out.println("Ngày lập hóa đơn: " + order.getOrderDate());
+        System.out.println();
+        System.out.println("STT    Mã SP  |  Mô tả          | Đơn giá  | Số lượng");
+        System.out.println("---------------------------------------------");
+        int stt = 1;
+        for (OrderDetail orderDetail : order.getLineItems()) {
+            Product product = orderDetail.getProduct();
+            int quantity = orderDetail.getQuantity();
+            String productID = product.getProductID();
+            String description = product.getDescription();
+            double price = product.getPrice();
+            System.out.printf("%-6d %-7s | %-15s | %-8.0f | %-8d%n", stt, productID, description, price, quantity);
+            stt++;
+        }
+        System.out.println("---------------------------------------------");
+        System.out.println("Tổng tiền thanh toán: " + order.calcTotalCharge() + " VND");
+    }
+}
